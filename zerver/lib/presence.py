@@ -99,6 +99,11 @@ def get_legacy_user_presence_info(
         timestamp=most_recent_info["timestamp"],
     )
 
+    # Include a copy of the aggregated field under the "default" key for backward
+    # compatibility with the mobile application, which expects to find data in this
+    # format under some client name.
+    result["default"] = result["aggregated"].copy()
+
     result["website"] = most_recent_info
 
     return result

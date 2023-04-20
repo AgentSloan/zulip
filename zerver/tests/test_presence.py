@@ -492,12 +492,12 @@ class SingleUserPresenceTests(ZulipTestCase):
         self.login("hamlet")
         result = self.client_get("/json/users/othello@zulip.com/presence")
         result_dict = self.assert_json_success(result)
-        self.assertEqual(set(result_dict["presence"].keys()), {"website", "aggregated"})
+        self.assertEqual(set(result_dict["presence"].keys()), {"website", "aggregated", "default"})
         self.assertEqual(set(result_dict["presence"]["website"].keys()), {"status", "timestamp"})
 
         result = self.client_get(f"/json/users/{othello.id}/presence")
         result_dict = self.assert_json_success(result)
-        self.assertEqual(set(result_dict["presence"].keys()), {"website", "aggregated"})
+        self.assertEqual(set(result_dict["presence"].keys()), {"website", "aggregated", "default"})
         self.assertEqual(set(result_dict["presence"]["website"].keys()), {"status", "timestamp"})
 
     def test_ping_only(self) -> None:
